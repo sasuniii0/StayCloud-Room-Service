@@ -1,52 +1,41 @@
 package lk.ijse.hotel.roomservice.domain;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "rooms")
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Room {
 
     @Id
     private String id;
-
-    @NotBlank
     private String roomNumber;
-
-    @NotNull
-    private RoomType type;
-
-    @NotBlank
+    private String type;
     private String description;
-
-    @NotNull
-    @Positive
-    private BigDecimal pricePerNight;
-
-    @Builder.Default
-    private List<String> amenities = new ArrayList<>();
-
-    @Builder.Default
+    private double pricePerNight;
+    private boolean available = true;
     private List<String> imageUrls = new ArrayList<>();
 
-    @Builder.Default
-    private boolean available = true;
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public enum RoomType {
-        SINGLE, DOUBLE, DELUXE, SUITE, FAMILY
-    }
+    public String getRoomNumber() { return roomNumber; }
+    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
+
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public double getPricePerNight() { return pricePerNight; }
+    public void setPricePerNight(double pricePerNight) { this.pricePerNight = pricePerNight; }
+
+    public boolean isAvailable() { return available; }
+    public void setAvailable(boolean available) { this.available = available; }
+
+    public List<String> getImageUrls() { return imageUrls; }
+    public void setImageUrls(List<String> imageUrls) { this.imageUrls = imageUrls; }
 }

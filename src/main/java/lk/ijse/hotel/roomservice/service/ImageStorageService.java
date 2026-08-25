@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.UUID;
 
 @Service
@@ -21,20 +20,12 @@ public class ImageStorageService {
         this.properties = properties;
     }
 
-    public String upload(String roomId, MultipartFile file) {
-        String objectName = "rooms/%s/%s-%s".formatted(
-                roomId, UUID.randomUUID(), file.getOriginalFilename());
-
+    public String upload(MultipartFile file) throws IOException {
+        String objectName = "rooms/" + UUID.randomUUID() + "-" + file.getOriginalFilename();
         BlobInfo blobInfo = BlobInfo.newBuilder(properties.getBucketName(), objectName)
                 .setContentType(file.getContentType())
                 .build();
-
-        try {
-            storage.create(blobInfo, file.getBytes());
-        } catch (IOException e) {
-            throw new UncheckedIOException("Failed to read uploaded file", e);
-        }
-
-        return "https://storage.googleapis.com/%s/%s".formatted(properties.getBucketName(), objectName);
+        storage.create(blobInfo, file.getBytes());
+        return "https://storage.googleapis.com/" + properties.getBucketName() + "/" + objectName;
     }
 }
