@@ -2,10 +2,13 @@ spring:
   application:
     name: room-service
   config:
-    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
+    import: "optional:configserver:${CONFIG_SERVER_URL:http://10.10.0.11:8888}"
   cloud:
     config:
       fail-fast: false
-      retry:
-        max-attempts: 5
-        initial-interval: 2000
+      override-system-properties: false
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://root:hotelmongo@10.10.0.2:27017/hotel_rooms?authSource=admin}
+  mongodb:
+    uri: ${MONGODB_URI:mongodb://root:hotelmongo@10.10.0.2:27017/hotel_rooms?authSource=admin}
