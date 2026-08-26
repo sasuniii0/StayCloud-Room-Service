@@ -1,3 +1,8 @@
+gcp:
+  storage:
+    bucket-name: ${GCS_BUCKET_NAME:hotel-room-images}
+    project-id: ${GCP_PROJECT_ID:staycloud}
+
 spring:
   application:
     name: room-service
