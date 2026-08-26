@@ -1,9 +1,6 @@
 # room-service
 
-> **Student Name:** \<Your Full Name\>
-> **Student Number:** \<Your Student Number\>
-> **Slack Handle:** \<optional\>
-> **GCP Project ID:** \<your-gcp-project-id\>
+> **Student Name:** Sasuni Wijerathne
 
 ## Project Description
 
